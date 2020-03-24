@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class Paddle : Cube
 {
-	void Update ()
+    private float speed = 2;
+
+    private void Update()
     {
-        //TODO: Движение
+        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
+        else if (!Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+        }
     }
 }

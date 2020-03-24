@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    Vector3 world_size;
-    public Vector3 WorldSize { get { return world_size; } }
-    public float Radius { private set; get; }
+    public float radius { protected set; get; }
+    protected Vector2 world_size;
 
-    void Start()
+    protected float leftBorder() { return (transform.position.x - radius); }
+    protected float rightBorder() { return transform.position.x + radius; }
+    protected float upBorder() { return transform.position.y + radius; }
+    protected float downBorder() { return transform.position.y - radius; }
+
+    protected virtual void Start()
     {
         var spriteRenderer = GetComponent<SpriteRenderer>();
         Vector2 sprite_size = spriteRenderer.sprite.rect.size;
@@ -16,6 +20,11 @@ public class Cube : MonoBehaviour
         world_size = local_sprite_size;
         world_size.x *= transform.lossyScale.x;
         world_size.y *= transform.lossyScale.y;
-        Radius = Mathf.Sqrt(WorldSize.x * WorldSize.x + WorldSize.y * WorldSize.y) / 2;
+        SetRadius();
+    }
+
+    protected virtual void SetRadius()
+    {
+        radius = Mathf.Sqrt(world_size.x * world_size.x + world_size.y * world_size.y) / 2;
     }
 }
