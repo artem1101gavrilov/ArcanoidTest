@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Paddle : Cube
 {
-    private float speed = 2;
+    private float speed = 1;
 
     private void Update()
     {
@@ -16,5 +16,11 @@ public class Paddle : Cube
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
+        SetBorder();
+    }
+
+    public void SetBonus()
+    {
+        spriteRenderer.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
     }
 }
